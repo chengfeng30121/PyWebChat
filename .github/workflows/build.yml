@@ -12,10 +12,24 @@ jobs:
           python-version: '3.12.4'
       - name: Install Dependencies
         run: |
+          cp buildozer.spec buildozer_template.spec
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Build
+      - name: Build arm64-v8a
         run: |
+          python writer.py arm64-v8a
+          buildozer -v android debug
+      - name: Build armeabi-v7a
+        run: |
+          python writer.py armeabi-v7a
+          buildozer -v android debug
+      - name: Build x86
+        run: |
+          python writer.py x86
+          buildozer -v android debug
+      - name: Build x86_64
+        run: |
+          python writer.py x86_64
           buildozer -v android debug
       - uses: actions/upload-artifact@v3
         with:
