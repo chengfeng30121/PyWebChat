@@ -18,19 +18,19 @@ jobs:
       - name: Build arm64-v8a
         run: |
           python writer.py arm64-v8a
-          buildozer -v android debug
+          buildozer -v android
       - name: Build armeabi-v7a
         run: |
           python writer.py armeabi-v7a
-          buildozer -v android debug
+          buildozer -v android
       - name: Build x86
         run: |
           python writer.py x86
-          buildozer -v android debug
+          buildozer -v android
       - name: Build x86_64
         run: |
           python writer.py x86_64
-          buildozer -v android debug
+          buildozer -v android
       - uses: actions/upload-artifact@v3
         with:
           name: Release Snapshot 0.1
