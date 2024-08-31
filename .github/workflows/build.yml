@@ -17,16 +17,16 @@ jobs:
           pip install -r requirements.txt
       - name: Build arm64-v8a
         run: |
-          python writer.py arm64-v8a
+          python libs/writer.py arm64-v8a
       - name: Build armeabi-v7a
         run: |
-          python writer.py armeabi-v7a
+          python libs/writer.py armeabi-v7a
       - name: Build x86
         run: |
-          python writer.py x86
+          python libs/writer.py x86
       - name: Build x86_64
         run: |
-          python writer.py x86_64
+          python libs/writer.py x86_64
       - uses: actions/upload-artifact@v3
         with:
           name: Release Snapshot 0.1

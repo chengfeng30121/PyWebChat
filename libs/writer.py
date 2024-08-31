@@ -3,6 +3,7 @@ import os
 import subprocess
 
 def main():
+    os.chdir("../")
     if not os.path.exists("main.py"):
         print("Error: `main.py` not found")
         sys.exit(1)
@@ -13,7 +14,7 @@ def main():
             print("Error: `buildozer_template.spec` not found")
             sys.exit(1)
         with open("buildozer_template.spec", "r") as f, open("buildozer.spec", "w") as f1:
-            content = f.read().replace("{{ arch }}", sys.argv[-1])
+            content = f.read().replace("{{ arch }}", sys.argv[-1]).replace("{{ android_jar }}", os.path.abspath("libs/pywebview-android.jar"))
             f1.write(content)
     else:
         print("Error: invalid architecture")
