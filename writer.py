@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 def main():
     if not os.path.exists("main.py"):
@@ -17,6 +18,7 @@ def main():
     else:
         print("Error: invalid architecture")
         sys.exit(1)
+    subprocess.run(["buildozer", "android", "release"])
 
 if __name__ == "__main__":
     main()
