@@ -18,7 +18,10 @@ def main():
     else:
         print("Error: invalid architecture")
         sys.exit(1)
+    print("Starting buildozer...")
+    print("Building APK...")
     subprocess.run(["buildozer", "android", "release"])
+    print("Building APK done!")
 
 if __name__ == "__main__":
     main()
