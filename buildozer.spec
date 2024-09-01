@@ -44,10 +44,10 @@ requirements = python3,kivy,pywebview,bottle,proxy-tools,typing_extensions,crypt
 #requirements.source.webview = webview
 
 # (str) Presplash of the application
-presplash.filename = ./assets/logo.jpg
+presplash.filename = ./assets/logo.png
 
 # (str) Icon of the application
-icon.filename = ./assets/logo.jpg
+icon.filename = ./assets/logo.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
