@@ -3,7 +3,7 @@ import os
 import subprocess
 
 def main():
-    os.chdir("../")
+    print(f"Before RUN:\n\tCWD: {os.getcwd()}")
     if not os.path.exists("main.py"):
         print("Error: `main.py` not found")
         sys.exit(1)
