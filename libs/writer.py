@@ -1,6 +1,5 @@
 import sys
 import os
-import subprocess
 
 def main():
     print(f"Before RUN:\n\tCWD: {os.getcwd()}")
@@ -22,11 +21,8 @@ def main():
 
     print("Starting buildozer...")
     print("Building APK...")
-    try:
-        result = subprocess.run(["buildozer", "android", "debug"], check=True)
-        print(f"Buildozer finished with return code {result.returncode}")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while running buildozer: {e}")
+    os.popen("buildozer android debug")
+    print("Buildozer finished")
 
 if __name__ == "__main__":
     main()
