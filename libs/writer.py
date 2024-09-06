@@ -21,7 +21,7 @@ def main():
 
     print("Starting buildozer...")
     print("Building APK...")
-    os.popen("buildozer android debug")
+    os.system("buildozer android debug")
     print("Buildozer finished")
 
 if __name__ == "__main__":
