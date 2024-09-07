@@ -1,5 +1,8 @@
 name: build arm64-v8a
-on: push
+on:
+  push:
+    branches:
+      - test
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,9 +35,7 @@ jobs:
           export apksigner_path="$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)"
           ls libs
           pwd
-          bash $apksigner_path sign --ks libs/cfapp.jks --ks-key-alias cf3012 --ks-pass pass:$kts_passwd --key-pass pass:$kts_passwd --v1-signing-enabled --v2-signing-enabled bin/*.apk
-        env:
-          kts_passwd: ${{ secrets.KTS_PASSWD }}
+          bash $apksigner_path sign --ks libs/cfapp.jks --ks-key-alias cf3012 --ks-pass pass:${{ secrets.KTS_PASSWD }} --key-pass pass:${{ secrets.KTS_PASSWD }} --v1-signing-enabled --v2-signing-enabled bin/*.apk
       - name: Verify Signatures
         continue-on-error: true
         run: |
