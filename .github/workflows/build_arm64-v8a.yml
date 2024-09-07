@@ -1,0 +1,36 @@
+name: build
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.4'
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Install Dependencies
+        run: |
+          cp buildozer.spec buildozer_template.spec
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build arm64-v8a
+        run: |
+          python libs/writer.py arm64-v8a
+      - name: Sign APKs
+        run: |
+          bash "$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)" sign --ks cfapp.kts --ks-key-alias cf3012 --ks-pass pass:$kts_passwd --key-pass pass:$kts_passwd --v1-signing-enabled --v2-signing-enabled bin/*.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Release Arm64-V8A 0.1
+          path: 'bin/*'
