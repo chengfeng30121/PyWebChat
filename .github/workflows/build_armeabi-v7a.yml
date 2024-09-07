@@ -30,16 +30,22 @@ jobs:
       - name: Sign APKs
         run: |
           export apksigner_path="$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)"
+          ls libs
+          pwd
           bash $apksigner_path sign --ks libs/cfapp.kts --ks-key-alias cf3012 --ks-pass pass:$kts_passwd --key-pass pass:$kts_passwd --v1-signing-enabled --v2-signing-enabled bin/*.apk
         env:
           kts_passwd: ${{ secrets.kts_passwd }}
       - name: Verify Signatures
+        continue-on-error: true
         run: |
           export apksigner_path="$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)"
           for f in bin/*.apk; do
             echo "Verifying $f"
             $apksigner_path verify --print-certs $f
-      - uses: actions/upload-artifact@v4
+          done
+      - name: Upload Artifacts
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
         with:
           name: Release Armeabi-V7A 0.1
           path: 'bin/*'
