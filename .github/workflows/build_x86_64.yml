@@ -31,13 +31,16 @@ jobs:
         run: |
           export apksigner_path="$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)"
           bash $apksigner_path sign --ks cfapp.kts --ks-key-alias cf3012 --ks-pass pass:$kts_passwd --key-pass pass:$kts_passwd --v1-signing-enabled --v2-signing-enabled bin/*.apk
+        env:
+          kts_passwd: ${{ secrets.kts_passwd }}
       - name: Verify Signatures
         run: |
+          export apksigner_path="$(find ~/.buildozer/android/platform/android-sdk | grep apksigner | head -n 1)"
           for f in bin/*.apk; do
             echo "Verifying $f"
             $apksigner_path verify --print-certs $f
       - name: Upload Artifacts
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: Release x86_64 0.1
           path: 'bin/*'
