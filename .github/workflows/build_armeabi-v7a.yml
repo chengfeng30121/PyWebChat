@@ -1,4 +1,4 @@
-name: build
+name: build armeabi-v7a
 on: push
 jobs:
   build:
