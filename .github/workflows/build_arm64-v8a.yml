@@ -44,7 +44,7 @@ jobs:
             $apksigner_path verify --print-certs $f
           done
       - name: Upload Artifacts
-        continue-on-error: trues
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: Release Arm64-V8A 0.1
