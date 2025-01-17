@@ -1,8 +1,5 @@
 name: build arm64-v8a
-on:
-  push:
-    branches:
-      - test
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest

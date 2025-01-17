@@ -1,8 +1,5 @@
 name: build x86_64
-on:
-  push:
-    branches:
-      - test
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest

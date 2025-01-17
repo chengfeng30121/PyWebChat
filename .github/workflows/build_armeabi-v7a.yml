@@ -1,8 +1,5 @@
 name: build armeabi-v7a
-on:
-  push:
-    branches:
-      - test
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
