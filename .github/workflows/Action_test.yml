@@ -4,10 +4,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: Checkout
         run:
-          lsb_release -a
-          echo "> ls /etc/apt/sources.list.d/"
-          ls /etc/apt/sources.list.d/
-          echo "cat "/etc/apt/sources.list"
-          cat /etc/apt/sources.list
+          bash run.sh
