@@ -1,20 +1,19 @@
-import os
-import sys
-import platform
+from flask import *
 import webview
+import platform
+import requests
 
-class Api:
-    def show_pwd(self):
-        return os.getcwd()
-    
-    def show_arch(self):
-        return str(platform.platform())
-    
-    def show_args(self):
-        return str(sys.argv)
-    
+def get_ip():
+    response = requests.get('https://api.ipify.org?format=json').json()
+    return response['ip']
+
+app = Flask(__name__, template_folder="assets")
+@app.route('/')
+def index():
+    print("get a request")
+    with open('assets/index.html', 'r') as f:
+        return f.read().replace("%SYSTEM%", platform.system()).replace("%IP%", get_ip())
 
 if __name__ == '__main__':
-    api = Api()
-    webview.create_window('VueTest1', 'assets/index.html', js_api=api, min_size=(600, 450))
+    webview.create_window('Arch Test', url=app, min_size=(600, 450))
     webview.start(ssl=True)
