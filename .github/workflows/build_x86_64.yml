@@ -21,6 +21,7 @@ jobs:
           java-version: 17
       - name: Install Dependencies
         run: |
+          apt install libltdl7-dev
           cp buildozer.spec buildozer_template.spec
           python -m pip install --upgrade pip
           pip install -r requirements.txt
