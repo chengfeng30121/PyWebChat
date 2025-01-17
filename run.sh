@@ -1,4 +1,4 @@
-cat "Types: deb
+sudo cat "Types: deb
 URIs: http://mirrors.aliyun.com/ubuntu/
 Suites: noble noble-updates noble-security
 Components: main restricted universe multiverse
